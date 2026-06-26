@@ -459,6 +459,45 @@ using System;
 
          }
 
+         // https://medium.com/@itsanuragjoshi/insert-an-element-in-a-linked-list-data-structures-algorithm-2a41d01afc24
+         public void InsertAtRandomLocation(T element)
+         {
+            //generate a random position from 0 to size
+            //GetRandom() can be negative or a very huge number
+            // Math.Abs() removes the negative sign so the number becomes positive
+            //% (size + 1) shrink the huge number down to valid positon from 0 to size.
+            // we use size + 1 so the tail position is also possible
+            int position = Math.Abs(MyrandomNumGen.GetRandom()) % (size +1);
+            
+            // if position is 0 we insert at the head using AddFirst
+            if(position == 0)
+            {
+                AddFirst(element);
+
+            }
+            // if position is equal to size we insert at the tail using AddLast
+            else if (position == size)
+            {
+                AddLast(element);
+
+            }
+            // otherwise the position is somewhere in the middle
+            else{
+                 // create a temporary pointer p and start it at head
+                 // we move p forward one node at a time until we reach the node at that position
+                Node<T> p = head;
+                for(int i = 0; i < position; i++)
+                {
+                    p = p.next;
+                }
+                //Insert the element before that p node using AddBefore
+                AddBefore(p.element, element);
+                
+            }
+
+
+        }
+
 
     }
         
