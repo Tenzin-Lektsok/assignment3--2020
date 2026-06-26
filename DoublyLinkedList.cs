@@ -498,6 +498,44 @@ using System;
 
         }
 
+        // https://medium.com/@singhamritpal49/doubly-linked-list-20b7e45bb37
+         // Merge appends the other list onto the end of this list (no sorting, no comparing values)
+        // we learned from the Medium push() method that the same pointer logic applies here
+        // instead of adding one node we connect a whole list using the same head tail pattern
+        public void Merge(DoublyLinkedList<T> other)
+        {
+            //if the other list is empty there is nothing to merge so we return
+            if(other.head == null)
+            {
+                return;
+            }
+            //List1 is empty, we give it list2 head and tail addresses
+            if(head == null)
+            {
+                //now list2 sharing same memory address of head with list1.
+                head = other.head;
+                //now list2 sharing same memory address of tail with list1.
+                tail = other.tail;
+
+            }
+            else{
+                 //if both lists have nodes we connect the end of list1 to start of list2
+                 //list1 tail next pointer now pointing forward to list2 first node
+                 tail.next = other.head;
+                 //list2 first node prev pointer now pointing back to list1 last node
+                 other.head.prev = tail;
+                 //list1 tail now pointing at list2 last node to denote end of merged list
+                 tail = other.tail;
+              
+            }
+            //Update count by adding both list sizes together.
+            size = size + other.GetCount();
+
+
+        }
+
+
+
 
     }
         
