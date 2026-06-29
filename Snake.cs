@@ -46,9 +46,40 @@ public class Snake : Animal
             Console.WriteLine(Name + " ate a bird.");
         }
     }
-    //Return snake name and position as a string.
+    //Reference is assignment 3 specifaction
+    //"cats and snakes can smell all animals within a 10 unit radius"
+    //"they need to store list of animals they can smell and update it as they move"
+    //"cats and snakes build their own lists since they have perfect information"
+    public void UpdateSmell(DoublyLinkedList<Animal> allAnimals)
+    {
+        //clear old smell list first because animals move each round
+        //animals that were in range before might now be out of range
+        // and new animals might now be in range so we start fresh each update
+        SmellList = new DoublyLinkedList<Animal>();
+
+        //traversal pattern from our PrintAllForward method where p starts at head.
+        Node<Animal> p = allAnimals.head;
+        while(p != null)
+        {
+            //skip this snake as snake should not smell itself
+            if(p.element != this)
+            {
+                //use FindDistance of Animal class to check if animal is within 10 unit radius
+                if(FindDistance(p.element)<= 10){
+                    SmellList.AddLast(p.element);
+                }
+
+            }
+            //move p pointer forward to next animal in list
+            p = p.next;
+
+        }
+
+    }
+    //Return snake name,ID and position as a string.
+    // updated from A2 to include ID and Z coordinate
     public override string ToString()
     {
-        return Name + "(" + X + "," + Y + ")";
+        return Name + "(ID:" + ID + " X:" + X + " Y:" + Y + " Z:" + Z + ")";
     }
 }
