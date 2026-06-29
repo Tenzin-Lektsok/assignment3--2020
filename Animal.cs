@@ -13,5 +13,16 @@ public class Animal
     public int Z { get; set; }
 
 
+     // constructor sets all properties when animal object is created.
+    public Animal(string name, string id, int x, int y, int z)
+    {
+        Name = name;
+        ID = id;
+        X = x;
+        Y = y;
+        Z = z;
+    }
+
+
 
 }
