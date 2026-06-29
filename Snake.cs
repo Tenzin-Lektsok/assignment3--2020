@@ -36,8 +36,9 @@ public class Snake : Animal
         Console.WriteLine(Name + " moved to (" + X + ", " + Y + "," + Z + ")");
     }
 
-    //Snake eats the first bird in the list.
-    public void EatBird(MyArrayList<Bird> birds)
+   //Snake eats the first bird in the list.
+    // updated from A2 to use DoublyLinkedList instead of MyArrayList
+    public void EatBird(DoublyLinkedList<Bird> birds)
     {
         if (birds.GetCount() > 0)
         {
