@@ -306,6 +306,79 @@ namespace Assignment3Template
              cat1.UpdateSmell(allAnimals);
              Console.WriteLine("cat1 SmellList count after eating a bird = " + cat1.SmellList.GetCount());
 
+             
+            Console.WriteLine("\n=== Smell Testing ===");     
+            // before we call UpdateSmell, cat1's SmellList is empty as nothing added yet
+            Console.WriteLine("Test 1: cat1 SmellList count = " + cat1.SmellList.GetCount()); 
+
+            // call UpdateSmell so cat1 checks distance with each animal in allAnimals list one at a time
+            //if that animal is within 10 units, cat1 adds it to its own SmellList
+           cat1.UpdateSmell(allAnimals);
+          // print how many animals got added proves the list can grow
+            Console.WriteLine("After UpdateSmell, cat1 SmellList count = " + cat1.SmellList.GetCount());
+            cat1.SmellList.PrintAllForward();
+
+            // snake1 works the same way as cat1, this proves UpdateSmell works for snakes too
+            snake1.UpdateSmell(allAnimals);
+
+            // cat1 eats a bird so that bird is removed from the birds list
+            cat1.EatBird(birds);
+
+            // bird is eaten and removed from birds list but it still sitting in allAnimals
+            // since allAnimals never gets updated when birds is changed
+            // we clear allAnimals and rebuild it the same way as before
+            // using cats, snakes, and the updated birds list 
+            // create brand new empty allAnimals list.
+            allAnimals = new DoublyLinkedList<Animal>();
+            allAnimals.AddLast(cat1);
+            allAnimals.AddLast(cat2);
+            allAnimals.AddLast(snake1);
+            allAnimals.AddLast(snake2);
+
+           // loop through birds list again and add only the birds that are still alive
+           b = birds.head;
+           while (b != null)
+           {
+               allAnimals.AddLast(b.element);
+              b = b.next;
+            }
+
+            // call UpdateSmell again with the rebuild allAnimals
+            //  bird1 was eaten so we rebuilt allAnimals without it
+            // cat1's SmellList updates correctly and no longer includes bird1
+             cat1.UpdateSmell(allAnimals);
+             Console.WriteLine("cat1 SmellList count after eating a bird = " + cat1.SmellList.GetCount());
+
+
+             Console.WriteLine("\n=== HearMovement Testing ===");
+
+            // pick the first bird sitting at birds.head list to test with
+            Bird testBird = birds.head.element;
+            Console.WriteLine("\nTesting with bird: " + testBird);
+
+           // move this bird so it gets a new random position and a Speed value gets calculated
+           testBird.Move(random);
+           Console.WriteLine("After moving, " + testBird.Name + " Speed = " + testBird.Speed);
+
+          // print distance from this bird to each cat and snake before checking HearMovement
+          // so we can manually verify later if HearMovement correctly adds testBird to the right cats and snakes
+           Console.WriteLine("Distance to cat1 = " + testBird.FindDistance(cat1));
+           Console.WriteLine("Distance to cat2 = " + testBird.FindDistance(cat2));
+           Console.WriteLine("Distance to snake1 = " + testBird.FindDistance(snake1));
+           Console.WriteLine("Distance to snake2 = " + testBird.FindDistance(snake2));
+
+          // testBird calls HearMovement to tell nearby cats and snakes about its speed
+           // if speed is more than 5, all cats within 15 units get added to their HeardBirds
+          // if speed is more than 10, all snakes within 10 units also get added
+          testBird.HearMovement(allCats, allSnakes);
+
+           // print how many birds cat1 has heard, count of birds added to cat1's HeardBirds
+           Console.WriteLine("\ncat1 HeardBirds count = " + cat1.HeardBirds.GetCount());
+           // print how many birds snake1 has heard, count of birds added to snake's HeardBirds
+           Console.WriteLine("snake1 HeardBirds count = " + snake1.HeardBirds.GetCount());
+
+        } 
+
         } 
 
 
