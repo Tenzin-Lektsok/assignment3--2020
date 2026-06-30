@@ -105,7 +105,18 @@ namespace Assignment3Template
                 int x = random.Next(-20, 21);
                 int y = random.Next(-20, 21);
                 int z = random.Next(-10, 11);
-                birds.AddLast(new Bird(birdNames[i], "B" + (i + 1), x, y, z));
+                // pick the ith  name for this bird from the names array
+                string thisBirdName = birdNames[i];
+
+                // give this bird an ID like B1,B2..
+                string thisBirdID = "B" + (i + 1);
+
+                 // create a new Bird object using its name, id, and the random x, y, z
+                 Bird newBird = new Bird(thisBirdName, thisBirdID, x, y, z);
+
+                //add that new bird to the end of the birds list
+                birds.AddLast(newBird);
+
             }
 
             Console.WriteLine("Created " + birds.GetCount() + " birds.");
