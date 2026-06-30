@@ -42,4 +42,10 @@ namespace Assignment3Template
         
     }
 
+    // ToString — return name, id and position
+    public override string ToString()
+    {
+        return Name + "(ID:" + ID + " X:" + X + " Y:" + Y + " Z:" + Z + ")";
+    }
+
 }
