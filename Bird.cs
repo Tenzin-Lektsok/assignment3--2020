@@ -55,4 +55,64 @@ public class Bird : Animal
 
      }
 
+     // Reference Assignment3 specification of Animals sections
+      // "when a bird exceeds speed of 5 all cats within 15 units can hear it"
+      // "when a bird exceeds speed of 10 all snakes within 10 units can hear it"
+      // "the birds tell cats/snakes in range what their speed is"
+      // "In HearMovement method, the birds need to store their movement and each cat/snake needs
+      //  to test distance and velocity for each bird, so what should happen is the birds tell
+      //  cats/snakes in range what their speed is"
+      // traversal pattern same as our PrintAllForward
+      // https://stackoverflow.com/questions/23937825/calculating-the-distance-between-2-points-in-2d-and-3d
+      // https://www.educative.io/answers/how-to-compute-euclidean-distance-in-c-sharp
+      // The distance check by FindDistance method which built from StackOverflow and Educative.
+      public void HearMovement(DoublyLinkedList<Cat> allCats, DoublyLinkedList<Snake>allSnakes)
+      {
+         // if speed is greater than 5 and also greater than 10 (like 12)
+        // we need to handle both cases individually
+        // if-else would skip the else block once the first if is true
+        // so we use two separate if statements instead 
+        
+        //if bird speed exceeds 5, all cats within 15 units range can hear bird and 
+        if(Speed > 5)
+        {
+            Node<Cat> c = allCats.head;
+            while(c != null)
+            {
+                // if distance from this bird to cat (found using FindDistance) is less than or equal to 15
+                if(FindDistance(c.element) <= 15)
+                {
+                    //then add this bird to that cats HeardBirds list as cat can hear it.
+                    c.element.HeardBirds.AddLast(this);
+
+                }
+                //Move forward to next cat in allCats list
+                c = c.next;
+
+            }
+
+
+        }
+        //if bird speed exceeds 10, all snakes within 10 units range can hear bird
+         if(Speed > 10)
+            {
+                Node<Snake> s = allSnakes.head;
+
+                while( s != null)
+                {
+                    // if distance from this bird to snake (found using FindDistance) is less than or equal to 10
+                    if(FindDistance(s.element) <= 10)
+                    {
+                        //then add this bird to that snakes HeardBirds list since the snake can hear it.
+                        s.element.HeardBirds.AddLast(this);
+
+                    }
+                      //Move forward to next snake in allSnakes list
+                    s =s.next;
+
+                }
+                
+            }
+
+
 }
