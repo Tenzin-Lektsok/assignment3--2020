@@ -1,4 +1,3 @@
-
 using System;
 using System.Diagnostics; // Required for stopwatch
 //Your name here
@@ -69,9 +68,8 @@ namespace Assignment3Template
             */
 
             AnimalSimulationTest();
-
-
         }
+
         static void AnimalSimulationTest()
         {
             Console.WriteLine("==== Animal Simulation Test ===\n");
@@ -90,16 +88,17 @@ namespace Assignment3Template
 
             // these names come from the BirdNames.txt file given in the assignment
             string[] birdNames = {
-           "Aja","Ala","Archimedes","Aubrey","Ava","Barry","Bella","Benny",
-          "Bertram","Birdie","Bobo","Bougie","Bubba","Calypso","Chantey",
-           "Cher","Chip","Chive","Chloe","Clive","Couscous","Dewey","Donut",
-            "Elvis","Flossie"};
+                "Aja","Ala","Archimedes","Aubrey","Ava","Barry","Bella","Benny",
+                "Bertram","Birdie","Bobo","Bougie","Bubba","Calypso","Chantey",
+                "Cher","Chip","Chive","Chloe","Clive","Couscous","Dewey","Donut",
+                "Elvis","Flossie"};
 
             // we create 25 birds because assignment says increase bird count to about 25
             // each bird gets a name from the list above and a random x, y, z position
             // birds spawn between -20 and 20 in X and Y so they land close enough
             // to cats and snakes to actually test smell and hearmovement
             DoublyLinkedList<Bird> birds = new DoublyLinkedList<Bird>();
+
             for (int i = 0; i < birdNames.Length; i++)
             {
                 int x = random.Next(-20, 21);
@@ -107,22 +106,19 @@ namespace Assignment3Template
                 int z = random.Next(-5, 6);
 
                 string thisBirdName = birdNames[i];
-
-
                 string thisBirdID = "B" + (i + 1);
-
 
                 Bird newBird = new Bird(thisBirdName, thisBirdID, x, y, z);
 
-
                 birds.AddLast(newBird);
-
             }
 
             Console.WriteLine("Created " + birds.GetCount() + " birds.");
+
             DoublyLinkedList<Cat> allCats = new DoublyLinkedList<Cat>();
             DoublyLinkedList<Snake> allSnakes = new DoublyLinkedList<Snake>();
             DoublyLinkedList<Animal> allAnimals = new DoublyLinkedList<Animal>();
+
             allCats.AddLast(cat1);
             allCats.AddLast(cat2);
 
@@ -174,7 +170,6 @@ namespace Assignment3Template
             Console.WriteLine("\nAnimals smelled by " + snake2.Name);
             snake2.SmellList.PrintAllForward();
 
-
             Console.WriteLine("\n==== HearMovement Test ====");
 
             // clear old heard lists before testing
@@ -198,7 +193,17 @@ namespace Assignment3Template
                 birdNode = birdNode.next;
             }
 
+            Console.WriteLine("\nBirds heard by " + cat1.Name);
+            cat1.HeardBirds.PrintAllForward();
 
+            Console.WriteLine("\nBirds heard by " + cat2.Name);
+            cat2.HeardBirds.PrintAllForward();
+
+            Console.WriteLine("\nBirds heard by " + snake1.Name);
+            snake1.HeardBirds.PrintAllForward();
+
+            Console.WriteLine("\nBirds heard by " + snake2.Name);
+            snake2.HeardBirds.PrintAllForward();
 
             Console.WriteLine("\n==== Smell Update Test ====");
 
@@ -237,7 +242,6 @@ namespace Assignment3Template
             // update smell again to show the list changes after deletion
             cat1.UpdateSmell(allAnimals);
             cat1.SmellList.PrintAllForward();
-
         }
     }
 }
