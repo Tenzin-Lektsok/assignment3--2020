@@ -67,7 +67,78 @@ namespace Assignment3Template
             Console.WriteLine("My name is: ___________________");// (please put your name in this statement)
             */
 
+            PriorityQueueAndHashTableTest();
             AnimalSimulationTest();
+        }
+        static void PriorityQueueAndHashTableTest()
+        {
+            Console.WriteLine("==== Priority Queue and HashTable Test ====\n");
+
+            CircularArray<SO> priorityArray = new CircularArray<SO>();
+            CircularLinkedList<SO> priorityLL = new CircularLinkedList<SO>();
+
+            priorityArray.enqueue(new SO(1), 2);
+            priorityArray.enqueue(new SO(2), 5);
+            priorityArray.enqueue(new SO(3), 3);
+            priorityArray.enqueue(new SO(4), 5);
+            priorityArray.enqueue(new SO(5), 1);
+            priorityArray.enqueue(new SO(6), 4);
+            priorityArray.enqueue(new SO(7), 2);
+            priorityArray.enqueue(new SO(8), 3);
+
+            Console.WriteLine("CircularArray priority order:");
+            priorityArray.printAll();
+
+            Console.WriteLine("\nCircularArray dequeue:");
+            Console.WriteLine(priorityArray.dequeue());
+
+            Console.WriteLine("\nCircularArray after one dequeue:");
+            priorityArray.printAll();
+
+            priorityLL.enqueue(new SO(1), 2);
+            priorityLL.enqueue(new SO(2), 5);
+            priorityLL.enqueue(new SO(3), 3);
+            priorityLL.enqueue(new SO(4), 5);
+            priorityLL.enqueue(new SO(5), 1);
+            priorityLL.enqueue(new SO(6), 4);
+            priorityLL.enqueue(new SO(7), 2);
+            priorityLL.enqueue(new SO(8), 3);
+
+            Console.WriteLine("\nCircularLinkedList priority order:");
+            priorityLL.printAll();
+
+            Console.WriteLine("\nCircularLinkedList dequeue:");
+            Console.WriteLine(priorityLL.dequeue());
+
+            Console.WriteLine("\nCircularLinkedList after one dequeue:");
+            priorityLL.printAll();
+
+            Console.WriteLine("\nTesting deleteAll:");
+
+            priorityArray.deleteAll();
+            priorityLL.deleteAll();
+
+            Console.WriteLine("CircularArray count after deleteAll: " + priorityArray.GetCount());
+            Console.WriteLine("CircularLinkedList count after deleteAll: " + priorityLL.GetCount());
+
+            Console.WriteLine("\nHashTable Testing");
+
+            string[] demoStrings = { "Srivastava", "Hurley", "Mitchell", "McConnell", "Feng",
+        "Noorian", "Young", "Smith", "Northrop", "Andreau" };
+
+            HashTable<string> myhashtable = new HashTable<string>(20);
+
+            for (int i = 0; i < demoStrings.Length; i++)
+            {
+                myhashtable.Add(demoStrings[i]);
+            }
+
+            Console.WriteLine("Find Hurley: " + myhashtable.Find("Hurley"));
+            Console.WriteLine("Find Smith: " + myhashtable.Find("Smith"));
+            Console.WriteLine("Find MissingName: " + myhashtable.Find("MissingName"));
+
+
+        Console.WriteLine();
         }
 
         static void AnimalSimulationTest()
